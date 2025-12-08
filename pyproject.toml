@@ -13,7 +13,9 @@ dependencies = [
     "rdflib (>=7.5.0,<8.0.0)",
     "pyshacl (>=0.30.1,<0.31.0)",
 ]
-
+packages = [
+    { include = "project_reasoner", from = "src" }
+]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
