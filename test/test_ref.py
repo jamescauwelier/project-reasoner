@@ -1,6 +1,6 @@
 from rdflib import URIRef
 
-from src.ref import ref
+from project_reasoner.ref import ref
 
 
 def test_ref_prepends_a_base_domain():

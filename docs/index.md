@@ -42,10 +42,9 @@ We need to define how a software project can be represented in a knowledge graph
 Event storming is an approach to gather requirements and goes through various stages. We need to find a knowledge graph
 representation for this reasoning process.
 
-- [ ] Design how event storming stages and facilitation can be represented and tracked
-- [ ] Project
+- [x] Project
   - [x] Start with a simple description, the 'what' of a project, e.g. "a personal finance app"
-  - [ ] Now supplement with goals / aims for the project (the why's), e.g. "to help users get insights in their spending habits"
+  - [x] Now supplement with goals / aims for the project (the why's), e.g. "to help users get insights in their spending habits"
 - [ ] Initial event features
   - [ ] Define an event including a description, e.g. "Receiving a bank transaction detail"
   - [ ] Delete events that are no longer relevant, e.g. because there are duplicates

@@ -1,5 +1,5 @@
-from src.knowledge_graph import KnowledgeGraph
-from src.project.description import (
+from project_reasoner.knowledge_graph import KnowledgeGraph
+from project_reasoner.project.description import (
     find_project_description,
     add_project_description_command,
 )

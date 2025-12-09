@@ -1,10 +1,17 @@
 import uuid
 from typing import Optional
 
-import pytest
 from rdflib import URIRef
 
-from src.project.goal import Goal, goal_ref
+from project_reasoner.knowledge_graph import KnowledgeGraph
+from project_reasoner.project.goal import (
+    Goal,
+    goal_ref,
+    create_goal_from_description,
+    add_goal_command,
+    find_all_goals,
+    remove_goal_command,
+)
 
 
 def __create_goal(
@@ -27,21 +34,32 @@ def test_a_goal_has_a_description():
     assert goal.description == "to enable healthy financial decisions"
 
 
-@pytest.mark.skip(reason="Not yet implemented")
 def test_we_start_with_no_goals():
-    pass
+    knowledge = KnowledgeGraph()
+    goals = knowledge.query(find_all_goals())
+    assert len(goals) == 0
 
 
-@pytest.mark.skip(reason="Not yet implemented")
 def test_we_can_add_and_retrieve_one_goal():
-    pass
+    knowledge = KnowledgeGraph()
+    knowledge.update(add_goal_command(create_goal_from_description("learn python")))
+    goals = knowledge.query(find_all_goals())
+    assert len(goals) == 1
+    assert goals[0].description == "learn python"
 
 
-@pytest.mark.skip(reason="Not yet implemented")
 def test_we_can_add_and_retrieve_multiple_goals():
-    pass
+    knowledge = KnowledgeGraph()
+    knowledge.update(add_goal_command(create_goal_from_description("learn Python")))
+    knowledge.update(add_goal_command(create_goal_from_description("learn Rust")))
+    goals = knowledge.query(find_all_goals())
+    assert len(goals) == 2
 
 
-@pytest.mark.skip(reason="Not yet implemented")
 def test_we_can_remove_a_goal():
-    pass
+    goal = create_goal_from_description("learn python")
+    knowledge = KnowledgeGraph()
+    knowledge.update(add_goal_command(goal))
+    knowledge.update(remove_goal_command(goal.id))
+    goals = knowledge.query(find_all_goals())
+    assert len(goals) == 0
