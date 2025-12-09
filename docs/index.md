@@ -55,6 +55,7 @@ representation for this reasoning process.
   - [ ] Commands + constraints
   - [ ] Policies / Rules
   - [ ] Actors
+- [ ] TODO: extract feature definitions from domain knowledge and project goals
 
 ### Chat Interface
 
