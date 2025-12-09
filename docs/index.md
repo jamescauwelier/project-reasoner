@@ -49,9 +49,12 @@ representation for this reasoning process.
   - [ ] Define an event including a description, e.g. "Receiving a bank transaction detail"
   - [ ] Delete events that are no longer relevant, e.g. because there are duplicates
   - [ ] List all known events
-- [ ] Detailing events
-  - [ ] Define actors, e.g. "Consumer"
-  - [ ] Optionally define scenarios that bring events together or group them
+- [ ] TODO: detailing (un)grouping of events to identify boundaries
+- [ ] TODO: brainstorm on what details can be added to events
+  - [ ] Processes / Flows
+  - [ ] Commands + constraints
+  - [ ] Policies / Rules
+  - [ ] Actors
 
 ### Chat Interface
 
