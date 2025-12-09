@@ -1,16 +1,18 @@
 from typing import Callable, Optional
 
-from rdflib import Graph, RDF, URIRef, Literal
+from rdflib import Graph, RDF, Literal
+
+from ref import ref
 
 
 def add_project_description_command(description: str) -> Callable[[Graph], None]:
     def command(g: Graph):
-        p = URIRef("https://good.vibrations.dev/project")
-        g.add((p, RDF.type, URIRef("https://good.vibrations.dev/types/project")))
+        p = ref("project")
+        g.add((p, RDF.type, ref("types/project")))
         g.add(
             (
                 p,
-                URIRef("https://good.vibrations.dev/types/project/description"),
+                ref("types/project/description"),
                 Literal(description),
             )
         )
@@ -22,11 +24,11 @@ def find_project_description() -> Callable[[Graph], Optional[str]]:
 
     def query(graph: Graph) -> Optional[str]:
         results = graph.query(
-            """
-            SELECT ?project ?description WHERE {
-                ?project a <https://good.vibrations.dev/types/project> .
-                ?project <https://good.vibrations.dev/types/project/description> ?description .
-            }
+            f"""
+            SELECT ?project ?description WHERE {{
+                ?project a <{ref("types/project")}> .
+                ?project <{ref("types/project/description")}> ?description .
+            }}
             """
         )
 

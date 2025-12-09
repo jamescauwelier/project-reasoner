@@ -44,7 +44,7 @@ representation for this reasoning process.
 
 - [ ] Design how event storming stages and facilitation can be represented and tracked
 - [ ] Project
-  - [ ] Start with a simple description, the 'what' of a project, e.g. "a personal finance app"
+  - [x] Start with a simple description, the 'what' of a project, e.g. "a personal finance app"
   - [ ] Now supplement with goals / aims for the project (the why's), e.g. "to help users get insights in their spending habits"
 - [ ] Initial event features
   - [ ] Define an event including a description, e.g. "Receiving a bank transaction detail"
