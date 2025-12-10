@@ -41,7 +41,15 @@ follow-up question can be asked. For this question to be presented, it needs to 
 links to an action `PromptUser` and is passed a `PromptComposer` which can take in contextual information to produce the
 needed prompt.
 
-When an evaluation failes, a prompt needs to be composed, so an `Evaluation` needs to be related to a ``
+- [ ] Figure out how to represent
+  - [ ] Evaluations
+    - [ ] What types of evaluations are needed?
+    - [ ] How to represent evaluation criteria? Just a prompt where an LLM evaluates?
+    - [ ] What system executes the evaluation reasoning? Is there over graph reasoning using SHACL or SPARQL?
+    - [ ] How do we represent the inputs to the evaluation? Is this a message history?
+  - [ ] Evaluation States
+  - [ ] Evaluation Actions
+  - [ ] Prompt Composers
 
 ## Case Study
 
