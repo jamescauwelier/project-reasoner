@@ -4,7 +4,7 @@ from typing import Callable, List
 
 from rdflib import URIRef, Graph, RDF, Literal
 
-from ref import ref
+from project_reasoner.ref import ref
 
 
 @dataclass(frozen=True)

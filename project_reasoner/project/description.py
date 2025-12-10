@@ -2,7 +2,7 @@ from typing import Callable, Optional
 
 from rdflib import Graph, RDF, Literal
 
-from ref import ref
+from project_reasoner.ref import ref
 
 
 def add_project_description_command(description: str) -> Callable[[Graph], None]:
