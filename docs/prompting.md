@@ -9,6 +9,15 @@ The motivation for defining prompt composition as a first-class concept in our k
 graph reasoning on how dynamic additions to the graph can influence the prompting of the agent. If this were not 
 embedded in the graph, it would have to be handled outside of it, meaning it would need hardcoded logic.
 
+## Components
+
+### `PromptTemplate`
+
+A `PromptTemplate` defines an entity that describes to a composer how to construct a specific prompt. To do this, it 
+contains a template, which uses the [Jinja 2 template language](https://jinja.palletsprojects.com/en/stable/templates/).
+
+Additionally, it provides information on how to pull in the relevant data and its constraints.
+
 ## Tasks
 
 - [ ] Define a `Prompt`
