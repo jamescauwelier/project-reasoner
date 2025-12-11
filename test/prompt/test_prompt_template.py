@@ -10,18 +10,33 @@ from project_reasoner.prompt.template import (
 )
 
 
-def __create_prompt_template() -> PromptTemplate:
-    return create_prompt_template()
+def __create_prompt_template(name: str = "Sample Template") -> PromptTemplate:
+    return create_prompt_template(name=name)
 
 
 def test_prompt_templates_have_an_id_property():
+    # creates prompt template
     template = __create_prompt_template()
+
+    # persist in graph
+    graph = KnowledgeGraph()
+    graph.update(add_prompt_template_command(template))
+    template = graph.query(find_prompt_template_by_id(template.id))
+
     assert template.id is not None
 
 
-@pytest.mark.skip(reason="Not yet implemented")
 def test_prompt_templates_have_a_name_property():
-    pass
+
+    # creates prompt template
+    template = __create_prompt_template(name="Prompt Template Name")
+
+    # persist in graph
+    graph = KnowledgeGraph()
+    graph.update(add_prompt_template_command(template))
+    template = graph.query(find_prompt_template_by_id(template.id))
+
+    assert template.name == "Prompt Template Name"
 
 
 @pytest.mark.skip(reason="Not yet implemented")
