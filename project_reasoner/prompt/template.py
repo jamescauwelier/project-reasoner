@@ -57,7 +57,6 @@ def add_prompt_template_command(template: PromptTemplate):
         g.add((template.id, GV.prompt_template_contents, Literal(template.contents)))
 
         # constructs a parameter bag
-        # parameters = Bag(g, BNode(), [])
         for parameter in template.parameters:
 
             # first, create the parameter node
@@ -76,21 +75,7 @@ def add_prompt_template_command(template: PromptTemplate):
                     Literal(parameter.data_type.name),
                 )
             )
-            # g.add((parameter.id, GV.parameterizes, IdentifiedNode(template.id)))
             g.add((parameter.id, GV.parameterizes, URIRef(template.id)))
-
-            # then link that node to the parameter bag
-            # parameters.append(IdentifiedNode(parameter.id))
-            # g.add(
-            #     (
-            #         template.id,
-            #         GV.prompt_template_has_parameter,
-            #         IdentifiedNode(parameter.id),
-            #     )
-            # )
-
-        # links the parameter bag to the template
-        # g.add((template.id, GV.prompt_template_parameter_set, parameters.uri))
 
     return command
 

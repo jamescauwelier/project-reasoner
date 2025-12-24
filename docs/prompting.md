@@ -16,7 +16,20 @@ embedded in the graph, it would have to be handled outside of it, meaning it wou
 A `PromptTemplate` defines an entity that describes to a composer how to construct a specific prompt. To do this, it 
 contains a template, which uses the [Jinja 2 template language](https://jinja.palletsprojects.com/en/stable/templates/).
 
-Additionally, it provides information on how to pull in the relevant data and its constraints.
+Additionally, it provides information on how to pull in the relevant data and its constraints. It uses descriptions in 
+`PromptTemplateParameter` definitions.
+
+### `PromptComposer`
+
+A template is only useful when it can be composed into a final prompt. A `PromptComposer` is responsible for taking a
+`PromptTemplate`, and documenting where the necessary data can be found to fill in the template parameters.
+
+A KG runtime can use this information to run Jinja2 template rendering, pulling in the relevant data from the KG as 
+needed to produce the `Prompt` and persist it in the graph. This `Prompt` is then used to prompt the AI model.
+
+### `Prompt`
+
+A piece of fulltext that is used to prompt an LLM model and becomes part of a `ChatHistory`.
 
 ## Tasks
 
