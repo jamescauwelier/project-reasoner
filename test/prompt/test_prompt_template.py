@@ -1,5 +1,3 @@
-import pytest
-
 from project_reasoner.knowledge_graph import KnowledgeGraph
 from project_reasoner.prompt.template import (
     create_prompt_template,
@@ -7,11 +5,15 @@ from project_reasoner.prompt.template import (
     add_prompt_template_command,
     find_prompt_template_by_id,
     remove_prompt_template_command,
+    PromptTemplateParameterDataType,
+    create_prompt_template_parameter,
 )
 
 
-def __create_prompt_template(name: str = "Sample Template") -> PromptTemplate:
-    return create_prompt_template(name=name)
+def __create_prompt_template(
+    name: str = "Sample Template", contents: str = ""
+) -> PromptTemplate:
+    return create_prompt_template(name=name, contents=contents)
 
 
 def test_prompt_templates_have_an_id_property():
@@ -39,14 +41,41 @@ def test_prompt_templates_have_a_name_property():
     assert template.name == "Prompt Template Name"
 
 
-@pytest.mark.skip(reason="Not yet implemented")
 def test_prompt_templates_have_a_contents_property():
-    pass
+
+    contents = "You are an agent. This is your prompt."
+
+    # creates prompt template
+    template = __create_prompt_template(contents=contents)
+
+    # persist in graph
+    graph = KnowledgeGraph()
+    graph.update(add_prompt_template_command(template))
+    template = graph.query(find_prompt_template_by_id(template.id))
+
+    assert template.contents == contents
 
 
-@pytest.mark.skip(reason="Not yet implemented")
-def test_prompt_templates_have_a_parameters_property():
-    pass
+def test_prompt_templates_can_have_a_string_parameter():
+
+    contents = "You are an agent. This is your prompt. And here is your task: {{task}}"
+
+    # creates prompt template
+    template = __create_prompt_template(contents=contents)
+    template.parameters.append(
+        create_prompt_template_parameter(
+            label="task", data_type=PromptTemplateParameterDataType.TEXT
+        )
+    )
+
+    # persist in graph
+    graph = KnowledgeGraph()
+    graph.update(add_prompt_template_command(template))
+    template = graph.query(find_prompt_template_by_id(template.id))
+
+    assert len(template.parameters) == 1
+    assert template.parameters[0].label == "task"
+    assert template.parameters[0].data_type == PromptTemplateParameterDataType.TEXT
 
 
 def test_prompt_templates_can_be_queried():

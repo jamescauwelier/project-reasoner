@@ -24,9 +24,9 @@ Additionally, it provides information on how to pull in the relevant data and it
   - [ ] add static text property
   - [ ] add an optional reference to a `PromptComposer` to document its origin
 - [ ] Define a `PromptComposer`
-  - [ ] Define a `PromptTemplate`
-    - [ ] Install Jinja2 template engine
-    - [ ] Define how to represent a Jinja2 template in RDF
-    - [ ] Finalize the template representation
+  - [x] Define a `PromptTemplate`
+    - [x] Install Jinja2 template engine
+    - [x] Define how to represent a Jinja2 template in RDF
+    - [x] Finalize the template representation
   - [ ] Define `PromptContext` definitions to pull in relevant data
     - is this done using shacl, sparql, URIRef?
