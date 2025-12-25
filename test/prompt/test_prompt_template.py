@@ -53,7 +53,7 @@ def test_prompt_templates_have_a_contents_property():
     graph.update(add_prompt_template_command(template))
     template = graph.query(find_prompt_template_by_id(template.id))
 
-    assert template.contents == contents
+    assert template.template == contents
 
 
 def test_prompt_templates_can_have_a_string_parameter():
@@ -62,7 +62,7 @@ def test_prompt_templates_can_have_a_string_parameter():
 
     # creates prompt template
     template = __create_prompt_template(contents=contents)
-    template.parameters.append(
+    template.parameter_definitions.append(
         create_prompt_template_parameter(
             label="task", data_type=PromptTemplateParameterDataType.TEXT
         )
@@ -73,9 +73,12 @@ def test_prompt_templates_can_have_a_string_parameter():
     graph.update(add_prompt_template_command(template))
     template = graph.query(find_prompt_template_by_id(template.id))
 
-    assert len(template.parameters) == 1
-    assert template.parameters[0].label == "task"
-    assert template.parameters[0].data_type == PromptTemplateParameterDataType.TEXT
+    assert len(template.parameter_definitions) == 1
+    assert template.parameter_definitions[0].label == "task"
+    assert (
+        template.parameter_definitions[0].data_type
+        == PromptTemplateParameterDataType.TEXT
+    )
 
 
 def test_prompt_templates_can_be_queried():

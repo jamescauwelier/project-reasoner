@@ -24,8 +24,10 @@ class PromptTemplateParameter:
 class PromptTemplate:
     id: URIRef
     name: str
-    contents: str
-    parameters: List[PromptTemplateParameter] = field(default_factory=lambda: [])
+    template: str
+    parameter_definitions: List[PromptTemplateParameter] = field(
+        default_factory=lambda: []
+    )
 
 
 def prompt_template_ref(template_id: UUID) -> URIRef:
@@ -37,7 +39,7 @@ def prompt_template_parameter_ref(parameter_id: UUID) -> URIRef:
 
 
 def create_prompt_template(name: str, contents: str) -> PromptTemplate:
-    return PromptTemplate(id=prompt_template_ref(uuid4()), name=name, contents=contents)
+    return PromptTemplate(id=prompt_template_ref(uuid4()), name=name, template=contents)
 
 
 def create_prompt_template_parameter(
@@ -54,10 +56,10 @@ def add_prompt_template_command(template: PromptTemplate):
         # defines general template properties
         g.add((template.id, RDF.type, Literal(GV.prompt_template)))
         g.add((template.id, GV.prompt_template_name, Literal(template.name)))
-        g.add((template.id, GV.prompt_template_contents, Literal(template.contents)))
+        g.add((template.id, GV.prompt_template_contents, Literal(template.template)))
 
         # constructs a parameter bag
-        for parameter in template.parameters:
+        for parameter in template.parameter_definitions:
 
             # first, create the parameter node
             g.add((parameter.id, RDF.type, GV.prompt_template_parameter))
@@ -105,7 +107,7 @@ def find_prompt_template_by_id(template_ref: URIRef):
             tpl = PromptTemplate(
                 id=template_ref,
                 name=str(props[GV.prompt_template_name]),
-                contents=str(props[GV.prompt_template_contents]),
+                template=str(props[GV.prompt_template_contents]),
             )
 
             parameter_data = graph.query(
@@ -126,7 +128,7 @@ def find_prompt_template_by_id(template_ref: URIRef):
                         data.data_type.toPython()
                     ],
                 )
-                tpl.parameters.append(parameter)
+                tpl.parameter_definitions.append(parameter)
 
             return tpl
 
