@@ -33,20 +33,39 @@ A piece of fulltext that is used to prompt an LLM model and becomes part of a `C
 
 ## Tasks
 
+### Refactoring
+
+- [ ] Create a module structure that more cleanly separates the knowledge graph from application logic
+  - [ ] Create a `graph` module and move most of the current code there
+  - [ ] Create an `application` module and move most `reasoning` module code there
+  - [ ] Validate that all commands and queries reside in the `application` module
+
+### Application Building
+
 - [ ] Define a `Prompt`
   - [ ] add static text property
   - [ ] add an optional reference to a `PromptComposer` to document its origin
+- [ ] Build and enforce constraints
+  - [ ] No two `PromptTemplate` may have the same `id`
+    - Define a SHACL constraint
+    - Validate the graph after mutating it with commands
+    - If the graph is invalid, create a representation of the validation errors to feed back to the application / user
+    - Rollback the mutation if the graph is invalid
+    - Validate if the rollback is producing a valid graph
+      - if not --> raise an unrecoverable error
+  - [ ] No two `PromptTemplateParameter` may have the same `id`
+    - Take similar steps as above with the `PromptTemplate` uniqueness constraint
 - [ ] Define a `PromptComposer`
   - [x] Define a `PromptTemplate`
     - [x] Install Jinja2 template engine
     - [x] Define how to represent a Jinja2 template in RDF
     - [x] Finalize the template representation
-    - [ ] Create a way to pass in application commands to build the knowledge graph with prompt templates
-      - [ ] Define a `ReasoningApplication`
+    - [x] Create a way to pass in application commands to build the knowledge graph with prompt templates
+      - [x] Define a `ReasoningApplication`
         - [x] Initializes and manages the KG for reasoning
         - [x] Receives command objects to mutate the KG 
           - build an example for `PromptTemplate` and `PromptTemplateParameter` creation
-        - [ ] Receives query objects to pull data from the KG
+        - [x] Receives query objects to pull data from the KG
           - build an example for `PromptTemplate` and `PromptTemplateParameter` creation
   - [ ] Define `PromptContext` definitions to pull in relevant data
     - is this done using shacl, sparql, URIRef?
