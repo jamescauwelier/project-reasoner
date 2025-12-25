@@ -41,5 +41,12 @@ A piece of fulltext that is used to prompt an LLM model and becomes part of a `C
     - [x] Install Jinja2 template engine
     - [x] Define how to represent a Jinja2 template in RDF
     - [x] Finalize the template representation
+    - [ ] Create a way to pass in application commands to build the knowledge graph with prompt templates
+      - [ ] Define a `ReasoningApplication`
+        - [ ] Initializes and manages the KG for reasoning
+        - [ ] Receives command objects to mutate the KG 
+          - build an example for `PromptTemplate` and `PromptTemplateParameter` creation
+        - [ ] Receives query objects to pull data from the KG
+          - build an example for `PromptTemplate` and `PromptTemplateParameter` creation
   - [ ] Define `PromptContext` definitions to pull in relevant data
     - is this done using shacl, sparql, URIRef?
