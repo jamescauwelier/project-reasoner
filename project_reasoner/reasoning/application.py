@@ -1,10 +1,13 @@
 from typing import Optional
 
+from rdflib import URIRef
+
 from project_reasoner.knowledge_graph import KnowledgeGraph
 from project_reasoner.prompt.template import (
     PromptTemplate,
     create_prompt_template,
     add_prompt_template_command,
+    find_prompt_template_by_id,
 )
 from project_reasoner.prompt.template import (
     create_prompt_template_parameter,
@@ -13,6 +16,7 @@ from project_reasoner.prompt.template import (
 from project_reasoner.reasoning.prompt.template.commands import (
     CreatePromptTemplateCommand,
 )
+from reasoning.prompt.template.queries import FindOnePromptTemplateByIdQuery
 
 
 class ReasoningApplication:
@@ -42,3 +46,8 @@ class ReasoningApplication:
         self.__graph.update(add_prompt_template_command(prompt_template))
 
         return prompt_template
+
+    def find_one_prompt_template_by_id(
+        self, query: FindOnePromptTemplateByIdQuery
+    ) -> Optional[PromptTemplate]:
+        return self.__graph.query(find_prompt_template_by_id(URIRef(query.template_id)))
