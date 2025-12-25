@@ -16,7 +16,9 @@ from project_reasoner.prompt.template import (
 from project_reasoner.reasoning.prompt.template.commands import (
     CreatePromptTemplateCommand,
 )
-from reasoning.prompt.template.queries import FindOnePromptTemplateByIdQuery
+from project_reasoner.reasoning.prompt.template.queries import (
+    FindOnePromptTemplateByIdQuery,
+)
 
 
 class ReasoningApplication:
