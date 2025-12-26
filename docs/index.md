@@ -18,6 +18,17 @@ The agent will:
 
 This is an experimental topic, without the need for a production deployment. Therefore, the architecture is quite simple.
 
+### Dependencies
+
+- [JSON-LD](https://json-ld.org/) 
+  - [Specification](https://www.w3.org/TR/json-ld/)
+- RDFLib
+  - [Github](https://github.com/RDFLib/rdflib) 
+  - [Manual](https://rdflib.readthedocs.io/en/stable/)
+- SHACL
+  - [Specification](https://www.w3.org/TR/shacl/)
+- [pySHACL](https://github.com/RDFLib/pySHACL)
+
 ### Knowledge Graph
 
 Graphs are usually represented either using RDF triples or property graphs. Production systems often use the latter in 
