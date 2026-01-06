@@ -7,6 +7,7 @@ from project_reasoner.prompt.template import (
     remove_prompt_template_command,
     PromptTemplateParameterDataType,
     create_prompt_template_parameter,
+    view_prompt_template_details,
 )
 
 
@@ -101,3 +102,16 @@ def test_prompt_templates_can_be_removed_from_graph():
     queried_template_2 = graph.query(find_prompt_template_by_id(created_template_2.id))
     assert queried_template_1 is None
     assert queried_template_2 is not None
+
+
+def test_view_prompt_template_details():
+    created_template = __create_prompt_template(
+        name="Detail Test", contents="Details here."
+    )
+    graph = KnowledgeGraph()
+    graph.update(add_prompt_template_command(created_template))
+    queried_template = graph.query(view_prompt_template_details(created_template.id))
+    assert queried_template is not None
+    assert queried_template.id is not None
+    assert queried_template.name == "Detail Test"
+    assert queried_template.template == "Details here."

@@ -10,7 +10,7 @@ class KnowledgeGraph:
     def __init__(self):
         self.graph = Graph()
         self.__validation_graph = Graph()
-        self.__initialize_validation_graph()
+        # self.__initialize_validation_graph()
 
     def __initialize_validation_graph(self):
 

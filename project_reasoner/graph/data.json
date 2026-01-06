@@ -1,0 +1,12 @@
+{
+  "@context": {
+    "@base": "https://good.vibrations.dev/",
+    "@vocab": "http://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "prompt-next-question",
+      "@type": "PromptTemplate"
+    }
+  ]
+}

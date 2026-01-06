@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import List
+from typing import List, Callable, Optional
 from uuid import uuid4, UUID
 
-from rdflib import URIRef, RDF, Literal
+from rdflib import URIRef, RDF, Literal, Graph
+from rdflib.query import ResultRow
 
 from project_reasoner.good_vibrations.types import GV
 from project_reasoner.ref import ref
@@ -87,6 +88,38 @@ def remove_prompt_template_command(template_ref: URIRef):
         g.remove((template_ref, None, None))
 
     return command
+
+
+@dataclass(frozen=True)
+class PromptTemplateDetails:
+    id: str
+    name: str
+    template: str
+
+
+def view_prompt_template_details(
+    template_ref: URIRef,
+) -> Callable[[Graph], Optional[PromptTemplateDetails]]:
+    def query(graph: Graph) -> Optional[PromptTemplateDetails]:
+        results: List[ResultRow] = graph.query(
+            f"""
+            SELECT ?id ?name ?template WHERE {{
+                <{template_ref}> <{GV.prompt_template_name}> ?name .
+                <{template_ref}> <{GV.prompt_template_contents}> ?template .
+                BIND(<{template_ref}> AS ?id)
+            }}
+            """
+        )
+
+        for r in results:
+            id = str(r.get("id"))
+            name = str(r.get("name"))
+            template = str(r.get("template"))
+            return PromptTemplateDetails(id=id, name=name, template=template)
+
+        return None
+
+    return query
 
 
 def find_prompt_template_by_id(template_ref: URIRef):

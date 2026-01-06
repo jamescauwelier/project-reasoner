@@ -1,0 +1,23 @@
+{
+  "@context": {
+    "@base": "https://good.vibrations.dev/",
+    "gv": "https://good.vibrations.dev/",
+    "sh": "http://www.w3.org/ns/shacl#",
+    "schema": "http://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "PromptTemplateShape",
+      "@type": "sh:NodeShape",
+      "sh:targetClass": "gv:PromptTemplate",
+      "sh:property": [
+        {
+          "@type": "sh:PropertyShape",
+          "sh:path": "gv:name",
+          "sh:minCount": 1
+        }
+      ]
+
+    }
+  ]
+}
